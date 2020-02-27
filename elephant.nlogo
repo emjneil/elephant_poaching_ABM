@@ -59,6 +59,9 @@ patches-own [
 
 to setup
   clear-all
+
+  if load-params-from-file? [ setup-sobol ]
+
   resize-world -20 20 -20 20                         ;; resize world so the grid fits evenly in it
 
   set-default-shape elephants "mammoth"
@@ -1501,6 +1504,24 @@ NetLogo 6.1.1
     </enumeratedValueSet>
     <enumeratedValueSet variable="overall-patrol-probability">
       <value value="0.1"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="sobol-experiment" repetitions="1" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>count poachers</metric>
+    <metric>count elephants</metric>
+    <steppedValueSet variable="param-line-to-use" first="1" step="1" last="8000"/>
+    <enumeratedValueSet variable="load-params-from-file?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="poacher-movement">
+      <value value="&quot;random&quot;"/>
+      <value value="&quot;adaptive&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="law-enforcement-strategy">
+      <value value="&quot;follow schedule&quot;"/>
+      <value value="&quot;follow herds&quot;"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
